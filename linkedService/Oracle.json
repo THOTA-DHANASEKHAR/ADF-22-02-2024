@@ -1,0 +1,16 @@
+{
+	"name": "Oracle",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=rahkeS-anahD-atohT;port=1522;servicename=XE;user id=HR",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkNDgwYTcwYy1kMTgxLTQ3ZjctOGU5Zi02NDI5MzQ1MjUyYWQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
