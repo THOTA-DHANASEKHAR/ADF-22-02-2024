@@ -49,30 +49,6 @@
 							}
 						},
 						{
-							"name": "totalcount",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "temp",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "totalcount",
-								"value": {
-									"value": "@variables('temp')",
-									"type": "Expression"
-								}
-							}
-						},
-						{
 							"name": "temp",
 							"type": "SetVariable",
 							"dependsOn": [
@@ -101,7 +77,7 @@
 							"type": "IfCondition",
 							"dependsOn": [
 								{
-									"activity": "totalcount",
+									"activity": "temp",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -115,7 +91,7 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "t_count",
+										"name": "totalcount1",
 										"type": "SetVariable",
 										"dependsOn": [],
 										"policy": {
@@ -124,8 +100,11 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "count",
-											"value": 0
+											"variableName": "totalcount",
+											"value": {
+												"value": "@variables('temp')",
+												"type": "Expression"
+											}
 										}
 									}
 								],
@@ -133,7 +112,14 @@
 									{
 										"name": "stop",
 										"type": "SetVariable",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "totalcount",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"policy": {
 											"secureOutput": false,
 											"secureInput": false
@@ -142,6 +128,23 @@
 										"typeProperties": {
 											"variableName": "i",
 											"value": true
+										}
+									},
+									{
+										"name": "totalcount",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "totalcount",
+											"value": {
+												"value": "@variables('temp')",
+												"type": "Expression"
+											}
 										}
 									}
 								]
