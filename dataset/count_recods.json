@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "50000 Sales Records.csv",
+				"fileName": "13000 Sales Records.csv",
 				"fileSystem": "landing"
 			},
 			"columnDelimiter": ",",
