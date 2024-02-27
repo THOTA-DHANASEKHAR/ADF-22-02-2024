@@ -86,7 +86,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@less(variables('count'),5000)",
+									"value": "@less(activity('Lookup1').output.count,5000)",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
