@@ -53,7 +53,7 @@
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "count",
+									"activity": "Lookup1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -67,7 +67,7 @@
 							"typeProperties": {
 								"variableName": "temp",
 								"value": {
-									"value": "@add(variables('count'),variables('totalcount'))",
+									"value": "@add(activity('Lookup1').output.count,variables('totalcount'))",
 									"type": "Expression"
 								}
 							}
@@ -149,30 +149,6 @@
 									}
 								]
 							}
-						},
-						{
-							"name": "count",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Lookup1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "count",
-								"value": {
-									"value": "@activity('Lookup1').output.count",
-									"type": "Expression"
-								}
-							}
 						}
 					],
 					"timeout": "0.12:00:00"
@@ -201,30 +177,6 @@
 						"type": "Expression"
 					}
 				}
-			},
-			{
-				"name": "last count value",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "final count",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "lastcountvalue",
-					"value": {
-						"value": "@variables('count')",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"variables": {
@@ -240,16 +192,9 @@
 				"type": "Integer",
 				"defaultValue": 0
 			},
-			"count": {
-				"type": "Integer",
-				"defaultValue": 0
-			},
 			"final count": {
 				"type": "Integer",
 				"defaultValue": 0
-			},
-			"lastcountvalue": {
-				"type": "Integer"
 			}
 		},
 		"annotations": []
