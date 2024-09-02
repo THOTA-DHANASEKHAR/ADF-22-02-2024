@@ -1,0 +1,24 @@
+{
+	"name": "ds_tgt_last_4days_records",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZ_BLOB_STORARGE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "outbound",
+				"container": "myfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

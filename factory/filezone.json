@@ -1,0 +1,9 @@
+{
+	"name": "filezone",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "55fa9b9c-4772-4a43-b36c-b6733028e579",
+		"tenantId": "724a5dbe-79d3-4f27-90d5-157ce61dd79d"
+	}
+}
