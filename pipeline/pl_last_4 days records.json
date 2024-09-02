@@ -1,9 +1,9 @@
 {
-	"name": "pl_last month_records",
+	"name": "pl_last_4 days records",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_last month records",
+				"name": "copy_last_4 days records",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -21,11 +21,7 @@
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"modifiedDatetimeStart": {
-								"value": "@startOfMonth(adddays(utcNow(),-28))",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": {
-								"value": "@adddays(startOfMonth(utcNow()),-1)",
+								"value": "@adddays(utcNow(),-4)",
 								"type": "Expression"
 							},
 							"wildcardFileName": "*",
@@ -70,8 +66,6 @@
 				]
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2024-09-01T16:03:33Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }
