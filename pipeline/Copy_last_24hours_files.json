@@ -28,6 +28,7 @@
 								"value": "@utcNow()",
 								"type": "Expression"
 							},
+							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {

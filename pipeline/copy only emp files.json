@@ -20,8 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "*.emp_",
-							"wildcardFileName": "*",
+							"wildcardFileName": "EMP_*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
