@@ -1,0 +1,12 @@
+{
+	"name": "ds_src_copy_all_tables_fromdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
