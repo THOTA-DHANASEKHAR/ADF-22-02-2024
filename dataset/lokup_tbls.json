@@ -1,5 +1,5 @@
 {
-	"name": "src_ds_copy_all_tabls",
+	"name": "lokup_tbls",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "sql_database",
@@ -7,10 +7,6 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
-		"typeProperties": {
-			"schema": "dbo",
-			"table": "TableDetails"
-		}
+		"schema": []
 	}
 }
