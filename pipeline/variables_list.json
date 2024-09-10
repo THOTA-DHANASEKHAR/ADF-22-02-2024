@@ -1,9 +1,9 @@
 {
-	"name": "copy_with_cntrltab",
+	"name": "variables_list",
 	"properties": {
 		"activities": [
 			{
-				"name": "ForEach1",
+				"name": "ForEach_variable",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
