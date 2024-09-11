@@ -9,14 +9,22 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@pipeline().parameters.cw_items",
+						"value": "@variables('tblist')",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Copy_fnb",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -66,147 +74,77 @@
 									"referenceName": "SourceDataset_fnb",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_schema": "@item().source.schema",
-										"cw_table": "@item().source.table"
+										"cw_schema": {
+											"value": "@item().schema",
+											"type": "Expression"
+										},
+										"cw_table": {
+											"value": "@item().table",
+											"type": "Expression"
+										}
 									}
 								}
 							],
 							"outputs": [
 								{
 									"referenceName": "DestinationDataset_fnb",
-									"type": "DatasetReference",
-									"parameters": {
-										"cw_fileName": "@item().destination.fileName"
-									}
+									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "tbl",
+								"value": {
+									"value": "@concat(item().schema, '.',item().table)",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
 			}
 		],
-		"parameters": {
-			"cw_items": {
+		"variables": {
+			"tblist": {
 				"type": "Array",
 				"defaultValue": [
 					{
-						"source": {
-							"schema": "dbo",
-							"table": "BuildVersion"
-						},
-						"destination": {
-							"fileName": "dboBuildVersion"
-						}
+						"schema": "dbo",
+						"table": "BuildVersion"
 					},
 					{
-						"source": {
-							"schema": "dbo",
-							"table": "ErrorLog"
-						},
-						"destination": {
-							"fileName": "dboErrorLog"
-						}
+						"schema": "dbo",
+						"table": "ErrorLog"
 					},
 					{
-						"source": {
-							"schema": "dbo",
-							"table": "TableDetails"
-						},
-						"destination": {
-							"fileName": "dboTableDetails"
-						}
+						"schema": "dbo",
+						"table": "TableDetails"
 					},
 					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "Address"
-						},
-						"destination": {
-							"fileName": "SalesLTAddress"
-						}
+						"schema": "SalesLT",
+						"table": "Address"
 					},
 					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "Customer"
-						},
-						"destination": {
-							"fileName": "SalesLTCustomer"
-						}
+						"schema": "SalesLT",
+						"table": "Product"
 					},
 					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "CustomerAddress"
-						},
-						"destination": {
-							"fileName": "SalesLTCustomerAddress"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "Product"
-						},
-						"destination": {
-							"fileName": "SalesLTProduct"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "ProductCategory"
-						},
-						"destination": {
-							"fileName": "SalesLTProductCategory"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "ProductDescription"
-						},
-						"destination": {
-							"fileName": "SalesLTProductDescription"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "ProductModel"
-						},
-						"destination": {
-							"fileName": "SalesLTProductModel"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "ProductModelProductDescription"
-						},
-						"destination": {
-							"fileName": "SalesLTProductModelProductDescription"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "SalesOrderDetail"
-						},
-						"destination": {
-							"fileName": "SalesLTSalesOrderDetail"
-						}
-					},
-					{
-						"source": {
-							"schema": "SalesLT",
-							"table": "SalesOrderHeader"
-						},
-						"destination": {
-							"fileName": "SalesLTSalesOrderHeader"
-						}
+						"schema": "SalesLT",
+						"table": "ProductCategory"
 					}
 				]
+			},
+			"tbl": {
+				"type": "String"
 			}
 		},
 		"annotations": []
