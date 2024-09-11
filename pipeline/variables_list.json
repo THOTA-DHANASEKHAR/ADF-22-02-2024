@@ -58,7 +58,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"tablename": {
-											"value": "@item().tablename",
+											"value": "@item().table",
 											"type": "Expression"
 										},
 										"schema": {
@@ -74,7 +74,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@item().filename",
+											"value": "@concat(item().schema,'_',item().table)",
 											"type": "Expression"
 										}
 									}
@@ -88,7 +88,37 @@
 		"parameters": {
 			"tablename": {
 				"type": "array",
-				"defaultValue": "[{'schema': 'salesLT', 'name': 'product'},     {'schema': 'salesLT', 'name': 'Address'},     {'schema': 'salesLT', 'name': 'customer'}]"
+				"defaultValue": [
+					{
+						"schema": "dbo",
+						"table": "BuildVersion"
+					},
+					{
+						"schema": "dbo",
+						"table": "ErrorLog"
+					},
+					{
+						"schema": "dbo",
+						"table": "TableDetails"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "Address"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "Product"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "ProductCategory"
+					}
+				]
+			}
+		},
+		"variables": {
+			"tbl": {
+				"type": "String"
 			}
 		},
 		"annotations": []
