@@ -23,7 +23,8 @@
 					"dataset": {
 						"referenceName": "src_ds_copy_all_tabls",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -57,8 +58,56 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"enableStaging": false
-							}
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "asql_data_load",
+									"type": "DatasetReference",
+									"parameters": {
+										"tbl_name": {
+											"value": "@item().obj_name",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "dynamic_tbl_load",
+									"type": "DatasetReference",
+									"parameters": {
+										"obj_name": {
+											"value": "@item().tbl_name",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
 					]
 				}

@@ -1,0 +1,35 @@
+{
+	"name": "dynamic_tbl_load",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZ_BLOB_STORARGE",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"obj_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@item.dataset().obj_name",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('newfiles/sql/db_tbls/dataset().obj_name')",
+					"type": "Expression"
+				},
+				"container": "myfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
