@@ -1,0 +1,135 @@
+{
+	"name": "pl_merge",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"EmployeeID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "EmployeeID",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EmployeeID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FirstName",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "FirstName",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LastName",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "LastName",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Position",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Position",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Department",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Department",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "JoiningDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "JoiningDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "src_merge",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tgt_merge",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
