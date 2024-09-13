@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select max(event_timestamp) from dbo.events;",
+						"sqlReaderQuery": "select max(event_timestamp)  A from dbo.events;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -42,7 +42,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select max(event_timestamp) from tds.events_new;",
+						"sqlReaderQuery": "select max(event_timestamp) A from tds.events_new;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -81,7 +81,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.event where event_timestamp betweeen @activity('tgt_tbl').output.firstRow and @activity('src_tbl').output.firstRow;",
+							"value": "select * from [dbo].[events]\nwhere event_timestamp > '@{activity('tgt_tbl').output.firstRow.A}' \nand event_timestamp <= '@{activity('src_tbl').output.firstRow.A}';\n",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -114,6 +114,56 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[SP_ETLLogTBL]",
+					"storedProcedureParameters": {
+						"CopyDuration": {
+							"value": {
+								"value": "@activity('Copy data1').output.copyDuration",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"DataFactoryName": {
+							"value": {
+								"value": "@pipeline().DataFactory",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Status": {
+							"value": {
+								"value": "@activity('Copy data1').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "sql_database",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
