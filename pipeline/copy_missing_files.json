@@ -25,6 +25,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -54,6 +55,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -256,7 +258,13 @@
 										"outputs": [
 											{
 												"referenceName": "missing_files_sink_copy1",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"Folder": {
+														"value": "@variables('item')",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									}
