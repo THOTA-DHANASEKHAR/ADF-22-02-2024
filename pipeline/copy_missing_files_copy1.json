@@ -1,5 +1,5 @@
 {
-	"name": "copy_missing_files",
+	"name": "copy_missing_files_copy1",
 	"properties": {
 		"activities": [
 			{
@@ -107,7 +107,6 @@
 						"value": "@activity('Filter1').output.value",
 						"type": "Expression"
 					},
-					"isSequential": false,
 					"activities": [
 						{
 							"name": "If Condition1",
@@ -154,8 +153,7 @@
 											"sink": {
 												"type": "DelimitedTextSink",
 												"storeSettings": {
-													"type": "AzureBlobFSWriteSettings",
-													"copyBehavior": "PreserveHierarchy"
+													"type": "AzureBlobFSWriteSettings"
 												},
 												"formatSettings": {
 													"type": "DelimitedTextWriteSettings",
@@ -222,8 +220,7 @@
 											"sink": {
 												"type": "DelimitedTextSink",
 												"storeSettings": {
-													"type": "AzureBlobFSWriteSettings",
-													"copyBehavior": "PreserveHierarchy"
+													"type": "AzureBlobFSWriteSettings"
 												},
 												"formatSettings": {
 													"type": "DelimitedTextWriteSettings",
@@ -255,7 +252,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "missing_files_sink_copy1",
+												"referenceName": "missing_files_sink",
 												"type": "DatasetReference"
 											}
 										]
