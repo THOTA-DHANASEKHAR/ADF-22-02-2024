@@ -19,7 +19,7 @@
 					"value": "@dataset().Folder",
 					"type": "Expression"
 				},
-				"container": "output"
+				"container": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
