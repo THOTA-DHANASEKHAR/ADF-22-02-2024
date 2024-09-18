@@ -28,14 +28,9 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false
@@ -54,7 +49,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "dsr_sink",
+						"referenceName": "dsr_sink_bin",
 						"type": "DatasetReference"
 					}
 				]
