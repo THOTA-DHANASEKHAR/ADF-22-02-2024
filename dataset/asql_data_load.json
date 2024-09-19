@@ -1,0 +1,24 @@
+{
+	"name": "asql_data_load",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql_database",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tbl_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": {
+				"value": "@dataset().tbl_name",
+				"type": "Expression"
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"name": "targrt_copy_csv_files",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZ_BLOB_STORARGE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "inbound",
+				"container": "myfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

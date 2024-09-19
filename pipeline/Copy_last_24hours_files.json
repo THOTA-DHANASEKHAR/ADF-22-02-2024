@@ -1,9 +1,9 @@
 {
-	"name": "pipeline3",
+	"name": "Copy_last_24hours_files",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy_last_24hours_files",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -18,8 +18,17 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
+							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@addhours(utcNow(),-24)",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@utcNow()",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -29,7 +38,7 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
@@ -49,20 +58,18 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "source_allert",
+						"referenceName": "ds_src",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "source_allert_copy1",
+						"referenceName": "tgt_24hours_files",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2024-02-25T18:05:25Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

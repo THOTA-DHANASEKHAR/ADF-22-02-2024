@@ -1,0 +1,16 @@
+{
+	"name": "asql_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "tds",
+			"table": "tds"
+		}
+	}
+}
