@@ -1,0 +1,6 @@
+{
+	"name": "dsr-integration",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
