@@ -16,11 +16,11 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@item.dataset().obj_name",
+					"value": "@dataset().obj_name",
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('newfiles/sql/db_tbls/dataset().obj_name')",
+					"value": "sql/tables",
 					"type": "Expression"
 				},
 				"container": "myfiles"
