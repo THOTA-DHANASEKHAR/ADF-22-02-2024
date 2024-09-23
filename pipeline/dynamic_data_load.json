@@ -139,7 +139,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "update  dbo.TableDetails set Active_status=0 where '@{item().TName}'",
+											"value": "update dbo.TableDetails set Active_status=0 where TName = '@{item().TName}'",
 											"type": "Expression"
 										}
 									}
