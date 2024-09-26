@@ -1,0 +1,9 @@
+{
+	"name": "kvadf01",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "593404e9-a47f-4e21-ad86-bf5d0a093a9d",
+		"tenantId": "724a5dbe-79d3-4f27-90d5-157ce61dd79d"
+	}
+}
