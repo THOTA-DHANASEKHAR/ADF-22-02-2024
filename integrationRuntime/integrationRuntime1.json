@@ -1,0 +1,12 @@
+{
+	"name": "integrationRuntime1",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/9e20b998-f52d-48b6-996e-bb2c187dbc1d/resourcegroups/SAT/providers/Microsoft.DataFactory/factories/ADFSAT-01/integrationruntimes/selfhosted1",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}

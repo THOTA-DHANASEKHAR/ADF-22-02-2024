@@ -1,0 +1,126 @@
+{
+	"name": "variables_list",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_variable",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.tablename",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy tables_wt_cnt_table",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "asql_cnt_tbl",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": {
+											"value": "@item().table",
+											"type": "Expression"
+										},
+										"schema": {
+											"value": "@item().schema",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "blob_tabls",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@concat(item().schema,'_',item().table)",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"tablename": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"schema": "dbo",
+						"table": "BuildVersion"
+					},
+					{
+						"schema": "dbo",
+						"table": "ErrorLog"
+					},
+					{
+						"schema": "dbo",
+						"table": "TableDetails"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "Address"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "Product"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "ProductCategory"
+					}
+				]
+			}
+		},
+		"variables": {
+			"tbl": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
